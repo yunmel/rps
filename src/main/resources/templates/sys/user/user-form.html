@@ -1,0 +1,35 @@
+<form role="form" id="user-form">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-fire"></i></span>
+        <input type="text" name="username" class="form-control" placeholder="用户名">
+    </div>
+    <br>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-flash"></i></span>
+        <input type="password" name="password" class="form-control" placeholder="密码">
+    </div>
+    <br>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-at"></i></span>
+        <input type="email" name="email" class="form-control" placeholder="邮箱">
+    </div>
+    <br>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+        <input type="text" name="name" class="form-control" placeholder="姓名">
+    </div>
+    <br>
+</form>
+
+<script>
+    function saveBtnClick(cb) {
+        $.post('/sys/user/save',$('#user-form').serialize(),function(data){
+        	if(data && data > 0){
+        		if(cb!= undefined){
+					layer.closeAll();                	
+        			eval(cb);
+                }
+        	}
+        })
+    }
+</script>

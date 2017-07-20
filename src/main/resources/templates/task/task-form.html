@@ -1,0 +1,45 @@
+<form class="form-horizontal" id="task-form">
+    <input type="hidden" name="project" value="${project}">
+    <div class="form-group">
+        <label for="result" class="col-sm-2 control-label">期望结果</label>
+        <div class="col-sm-10">
+            <input type="text" name="result" class="form-control" id="result" placeholder="期望结果">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="describe" class="col-sm-2 control-label">任务描述</label>
+        <div class="col-sm-10">
+            <textarea name="describe" class="form-control" id="describe" rows="4" placeholder="任务描述"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="exp" class="col-sm-2 control-label">任务奖励</label>
+        <div class="col-sm-10">
+            <input type="number" name="exp" min="1"  max="10" class="form-control" id="exp" placeholder="任务奖励">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="module" class="col-sm-2 control-label">功能模块</label>
+        <div class="col-sm-10" id="module">
+            <select class="form-control">
+                <option value="1">系统管理</option>
+                <option value="2">权限管理</option>
+            </select>
+        </div>
+    </div>
+</form>
+<script>
+function saveBtnClick(cb) {
+    $.post('/task/save',$('#task-form').serialize(),function(data){
+    	if(data && data > 0){
+    		if(cb!= undefined){
+				layer.closeAll();                	
+    			eval(cb);
+            }
+    	}
+    })
+}
+</script>

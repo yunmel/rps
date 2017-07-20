@@ -1,0 +1,28 @@
+.app-box {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.app-box .app-header {
+    position: relative;
+    padding: 0px 15px 5px 15px;
+}
+
+.app-title {
+    margin-top: 5px;
+}
+
+.app-tools {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.btn-app-tool {
+    padding: 5px;
+    font-size: 28px;
+    background: transparent;
+    color: #97a0b3;
+    margin-top: -18px;
+}
