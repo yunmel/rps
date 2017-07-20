@@ -1,40 +1,23 @@
 #include("/layout/layout-header.html")
+
 <body class="hold-transition skin-green-light fixed sidebar-mini sidebar-collapse">
     <!-- Site wrapper -->
     <div class="wrapper">
-       #include("/layout/main-header.html")
-       #include("/layout/main-sidebar.html")
+        #include("/layout/main-header.html")
+        <!-- Content Wrapper. Contains page content -->
+        #include("/layout/main-sidebar.html")
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper" id="main-content">
-            
-        </div>
- 		#include("/layout/main-footer.html")
-        <div class="control-sidebar-bg "></div>
-        <div class="hidden" id="task-form">
-                <form role="form">
-                    <!-- text input -->
-                    <div class="form-group">
-                        <label>任务名称</label>
-                        <input type="text" class="form-control" placeholder="Enter ...">
-                    </div>
-                    <div class="form-group">
-                        <label>Text Disabled</label>
-                        <input type="text" class="form-control" placeholder="Enter ..." disabled="">
-                    </div>
 
-                    <!-- textarea -->
-                    <div class="form-group">
-                        <label>任务描述</label>
-                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                    </div>
-                </form>
-            </div>
-     </div>
-     #include("/layout/layout-js.html") 
+        </div>
+        #include("/layout/main-footer.html")
+        <div class="control-sidebar-bg "></div>
+    </div>
+    #include("/layout/layout-js.html")
 </body>
 <script>
     $(function() {
-       $('#main-content').load("/main/content");
+        $('#main-content').load("/main/content");
     });
 </script>
 

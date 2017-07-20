@@ -1,13 +1,9 @@
 package com.yunmel.rps;
 
 import com.blade.Blade;
-import com.blade.Environment;
-import com.blade.event.EventType;
-import com.blade.jdbc.ar.SampleActiveRecord;
-import com.blade.kit.StringKit;
 import com.blade.mvc.WebContext;
 import com.blade.mvc.view.template.JetbrickTemplateEngine;
-import com.yunmel.rps.config.DbConfig;
+import com.yunmel.rps.config.impl.ActiveRecord;
 
 /**
  * Hello world!
@@ -16,7 +12,7 @@ public class Application {
 
     public static void main(String[] args) {
     	Blade blade = Blade.me();
-    	blade.register(new SampleActiveRecord(DbConfig.hikariPool()));
+    	blade.register(new ActiveRecord());
     	WebContext.init(blade, "",false);
 //        blade.before("/*", ((request, response) -> {
 //            String uri = request.uri();

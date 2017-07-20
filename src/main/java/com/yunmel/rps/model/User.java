@@ -2,7 +2,7 @@ package com.yunmel.rps.model;
 
 import java.io.Serializable;
 
-import com.blade.jdbc.annotation.Table;
+import com.yunmel.rps.config.annotation.Table;
 
 @Table(name = "t_base_user", pk = "id")
 public class User implements Serializable{
@@ -56,5 +56,13 @@ public class User implements Serializable{
 	public void setScore(Integer score) {
 		this.score = score;
 	}
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString() {
+    return "User [id=" + id + ", username=" + username + ", password=" + password + ", name=" + name
+        + ", email=" + email + ", level=" + level + ", score=" + score + "]";
+  }
     
 }

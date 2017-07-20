@@ -2,7 +2,7 @@ package com.yunmel.rps.model;
 
 import java.io.Serializable;
 
-import com.blade.jdbc.annotation.Table;
+import com.yunmel.rps.config.annotation.Table;
 
 @Table(name = "t_core_task", pk = "id")
 public class Task implements Serializable{
