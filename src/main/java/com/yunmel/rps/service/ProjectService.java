@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.blade.ioc.annotation.Bean;
 import com.blade.ioc.annotation.Inject;
-import com.yunmel.rps.config.IActiveRecord;
+import com.yunmel.rps.db.IActiveRecord;
 import com.yunmel.rps.model.Project;
 
 @Bean

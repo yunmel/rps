@@ -1,4 +1,4 @@
-package com.yunmel.rps.config.annotation;
+package com.yunmel.rps.db.annotation;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

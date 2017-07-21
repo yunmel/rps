@@ -1,7 +1,7 @@
 /*
  * Copyright ©2016 四川云麦尔科技 Inc. All rights reserved.
  */
-package com.yunmel.rps.config.impl;
+package com.yunmel.rps.db.impl;
 
 import java.io.InputStream;
 import java.lang.reflect.Method;
@@ -13,14 +13,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.yunmel.rps.config.IActiveRecord;
-import com.yunmel.rps.config.annotation.Table;
+import com.yunmel.rps.db.IActiveRecord;
+import com.yunmel.rps.db.SqlBuilder;
+import com.yunmel.rps.db.annotation.Table;
 import com.yunmel.rps.exception.RpsSqlException;
 import com.yunmel.rps.utils.StringUtils;
 import com.zaxxer.hikari.HikariConfig;
@@ -34,7 +36,7 @@ import com.zaxxer.hikari.HikariDataSource;
  */
 public class ActiveRecord implements IActiveRecord {
   private Logger LOG = LoggerFactory.getLogger(ActiveRecord.class);
-  
+
   private Connection connection = null;
   private DataSource ds;
   private PreparedStatement pstmt = null;
@@ -185,7 +187,7 @@ public class ActiveRecord implements IActiveRecord {
     } catch (SQLException e) {
       throw new RpsSqlException("Error creating connection", e);
     }
-    
+
     String sql = "update " + getTableName(entity.getClass()) + " set ";
     // 获得该类所有get方法对象集合
     List<Method> list = this.matchPojoMethods(entity, "get");
@@ -197,14 +199,12 @@ public class ActiveRecord implements IActiveRecord {
     while (iter.hasNext()) {
       tempMethod = iter.next();
       // 如果方法名中带有ID字符串并且长度为2,则视为ID.
-      if (tempMethod.getName().lastIndexOf("Id") != -1
-          && tempMethod.getName().substring(3).length() == 2) {
+      if (tempMethod.getName().lastIndexOf("Id") != -1 && tempMethod.getName().substring(3).length() == 2) {
         // 把ID字段的对象存放到一个变量中,然后在集合中删掉.
         idMethod = tempMethod;
         iter.remove();
         // 如果方法名去掉set/get字符串以后与pojo + "id"想符合(大小写不敏感),则视为ID
-      } else if ((entity.getClass().getSimpleName() + "Id")
-          .equalsIgnoreCase(tempMethod.getName().substring(3))) {
+      } else if ((entity.getClass().getSimpleName() + "Id").equalsIgnoreCase(tempMethod.getName().substring(3))) {
         idMethod = tempMethod;
         iter.remove();
       }
@@ -268,7 +268,7 @@ public class ActiveRecord implements IActiveRecord {
     } catch (SQLException e) {
       throw new RpsSqlException("Error creating connection", e);
     }
-    
+
     String sql = "delete from " + getTableName(entity.getClass()) + " where ";
 
     // 存放字符串为"id"的字段对象
@@ -280,14 +280,12 @@ public class ActiveRecord implements IActiveRecord {
     while (iter.hasNext()) {
       Method tempMethod = iter.next();
       // 如果方法名中带有ID字符串并且长度为2,则视为ID.
-      if (tempMethod.getName().lastIndexOf("Id") != -1
-          && tempMethod.getName().substring(3).length() == 2) {
+      if (tempMethod.getName().lastIndexOf("Id") != -1 && tempMethod.getName().substring(3).length() == 2) {
         // 把ID字段的对象存放到一个变量中,然后在集合中删掉.
         idMethod = tempMethod;
         iter.remove();
         // 如果方法名去掉set/get字符串以后与pojo + "id"想符合(大小写不敏感),则视为ID
-      } else if ((entity.getClass().getSimpleName() + "Id")
-          .equalsIgnoreCase(tempMethod.getName().substring(3))) {
+      } else if ((entity.getClass().getSimpleName() + "Id").equalsIgnoreCase(tempMethod.getName().substring(3))) {
         idMethod = tempMethod;
         iter.remove();
       }
@@ -323,8 +321,8 @@ public class ActiveRecord implements IActiveRecord {
     } catch (SQLException e) {
       throw new RpsSqlException("Error creating connection", e);
     }
-    
-    String sql = "select * from " + getTableName(clazz) + " where "  + getPKName(clazz) + " = ? ";;
+
+    String sql = "select * from " + getTableName(clazz) + " where " + getPKName(clazz) + " = ? ";;
 
     // 通过子类的构造函数,获得参数化类型的具体类型.比如BaseDAO<T>也就是获得T的具体类型
     T entity = clazz.newInstance();
@@ -333,7 +331,7 @@ public class ActiveRecord implements IActiveRecord {
     Iterator<Method> iter = list.iterator();
 
     // 封装语句完毕,打印sql语句
-    LOG.info("query sql is : {}, param is : {} . ",sql,object);
+    LOG.info("query sql is : {}, param is : {} . ", sql, object);
 
     // 获得连接
     PreparedStatement statement = this.connection.prepareStatement(sql);
@@ -357,16 +355,17 @@ public class ActiveRecord implements IActiveRecord {
         Method method = iter.next();
         if (method.getParameterTypes()[0].getSimpleName().indexOf("Date") != -1) {
           this.setDate(method, entity, rs.getDate(method.getName().substring(3).toLowerCase()));
-        } else if (method.getParameterTypes()[0].getSimpleName().indexOf("Long") != -1){
+        } else if (method.getParameterTypes()[0].getSimpleName().indexOf("Long") != -1) {
           this.setLong(method, entity, rs.getLong(method.getName().substring(3).toLowerCase()));
-        } else if (method.getParameterTypes()[0].getSimpleName().indexOf("Integer") != -1){
+        } else if (method.getParameterTypes()[0].getSimpleName().indexOf("Integer") != -1) {
           this.setInt(method, entity, rs.getInt(method.getName().substring(3).toLowerCase()));
         } else {
           this.setString(method, entity, rs.getString(method.getName().substring(3).toLowerCase()));
         }
-//        else if (method.getParameterTypes()[0].getSimpleName().indexOf("InputStream") != -1) {
-//          this.setBlob(method, entity,rs.getBlob(method.getName().substring(3).toLowerCase()).getBinaryStream());
-//        } 
+        // else if (method.getParameterTypes()[0].getSimpleName().indexOf("InputStream") != -1) {
+        // this.setBlob(method,
+        // entity,rs.getBlob(method.getName().substring(3).toLowerCase()).getBinaryStream());
+        // }
       }
     }
     // 关闭结果集
@@ -482,6 +481,104 @@ public class ActiveRecord implements IActiveRecord {
       return table.pk();
     }
     return "id";
+  }
+
+  @Override
+  public <T> List<T> findAll(Class<T> clazz) throws Exception {
+
+    try {
+      if (connection.isClosed()) {
+        createConnection();
+      }
+    } catch (SQLException e) {
+      throw new RpsSqlException("Error creating connection", e);
+    }
+
+    String sql = "select * from " + getTableName(clazz);
+
+    // 通过子类的构造函数,获得参数化类型的具体类型.比如BaseDAO<T>也就是获得T的具体类型
+    T entity = clazz.newInstance();
+
+    List<Method> list = this.matchPojoMethods(entity, "set");
+    Iterator<Method> iter = list.iterator();
+
+    // 封装语句完毕,打印sql语句
+    LOG.info("query sql is : {} . ", sql);
+
+    // 获得连接
+    PreparedStatement statement = this.connection.prepareStatement(sql);
+
+    // 执行sql,取得查询结果集.
+    ResultSet rs = query(statement);
+    // 把指针指向迭代器第一行
+    iter = list.iterator();
+    List<T> resultList = new ArrayList<>();
+    // 封装
+    while (rs.next()) {
+      entity = clazz.newInstance();
+      while (iter.hasNext()) {
+        Method method = iter.next();
+        if (method.getParameterTypes()[0].getSimpleName().indexOf("Date") != -1) {
+          this.setDate(method, entity, rs.getDate(method.getName().substring(3).toLowerCase()));
+        } else if (method.getParameterTypes()[0].getSimpleName().indexOf("Long") != -1) {
+          this.setLong(method, entity, rs.getLong(method.getName().substring(3).toLowerCase()));
+        } else if (method.getParameterTypes()[0].getSimpleName().indexOf("Integer") != -1) {
+          this.setInt(method, entity, rs.getInt(method.getName().substring(3).toLowerCase()));
+        } else {
+          this.setString(method, entity, rs.getString(method.getName().substring(3).toLowerCase()));
+        }
+        // else if (method.getParameterTypes()[0].getSimpleName().indexOf("InputStream") != -1) {
+        // this.setBlob(method,
+        // entity,rs.getBlob(method.getName().substring(3).toLowerCase()).getBinaryStream());
+        // }
+      }
+      resultList.add(entity);
+    }
+    // 关闭结果集
+    rs.close();
+    // 关闭预编译对象
+    statement.close();
+    return resultList;
+  }
+
+  @Override
+  public <T> List<T> findByParams(Class<T> clazz, Map<String, Object> params) throws Exception {
+    try {
+      if (connection.isClosed()) {
+        createConnection();
+      }
+    } catch (SQLException e) {
+      throw new RpsSqlException("Error creating connection", e);
+    }
+    Object[] objs = new Object[params.size()];
+    String sql = "select * from " + getTableName(clazz) + " where 1 = 1" + SqlBuilder.buildSql(params, objs);
+    LOG.info("query sql is : {} . ", sql);
+    PreparedStatement stmt = this.connection.prepareStatement(sql);
+    for (int i = 1; i <= objs.length; i++) {
+      stmt.setObject(i, objs[i - 1]);
+    }
+    ResultSet rs = stmt.executeQuery();
+    List<T> list = new ArrayList<>();
+    T entity = clazz.newInstance();
+    List<Method> methods = this.matchPojoMethods(entity, "set");
+    Iterator<Method> iter = methods.iterator();
+    while (rs.next()) {
+      entity = clazz.newInstance();
+      while (iter.hasNext()) {
+        Method method = iter.next();
+        if (method.getParameterTypes()[0].getSimpleName().indexOf("Date") != -1) {
+          this.setDate(method, entity, rs.getDate(method.getName().substring(3).toLowerCase()));
+        } else if (method.getParameterTypes()[0].getSimpleName().indexOf("Long") != -1) {
+          this.setLong(method, entity, rs.getLong(method.getName().substring(3).toLowerCase()));
+        } else if (method.getParameterTypes()[0].getSimpleName().indexOf("Integer") != -1) {
+          this.setInt(method, entity, rs.getInt(method.getName().substring(3).toLowerCase()));
+        } else {
+          this.setString(method, entity, rs.getString(method.getName().substring(3).toLowerCase()));
+        }
+      }
+      list.add(entity);
+    }
+    return list;
   }
 
 }

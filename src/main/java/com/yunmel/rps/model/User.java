@@ -2,7 +2,7 @@ package com.yunmel.rps.model;
 
 import java.io.Serializable;
 
-import com.yunmel.rps.config.annotation.Table;
+import com.yunmel.rps.db.annotation.Table;
 
 @Table(name = "t_base_user", pk = "id")
 public class User implements Serializable{

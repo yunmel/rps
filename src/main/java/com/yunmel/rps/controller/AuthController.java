@@ -5,8 +5,6 @@ import com.blade.mvc.annotation.Path;
 import com.blade.mvc.annotation.PostRoute;
 import com.blade.mvc.http.Request;
 import com.blade.mvc.http.Response;
-import com.blade.mvc.http.Session;
-import com.yunmel.rps.Const;
 import com.yunmel.rps.model.User;
 
 /**
@@ -53,12 +51,6 @@ public class AuthController {
         response.redirect("/index");
 
         return null;
-    }
-
-    @GetRoute("logout")
-    public void logout(Session session, Response response) {
-        session.removeAttribute(Const.LOGIN_SESSION_KEY);
-        response.redirect("/login");
     }
 
 }

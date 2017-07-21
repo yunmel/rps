@@ -3,8 +3,10 @@
  */
 package com.yunmel.rps;
 
-import com.yunmel.rps.config.IActiveRecord;
-import com.yunmel.rps.config.impl.ActiveRecord;
+import java.util.List;
+
+import com.yunmel.rps.db.IActiveRecord;
+import com.yunmel.rps.db.impl.ActiveRecord;
 import com.yunmel.rps.model.User;
 
 /**
@@ -19,6 +21,10 @@ public class ActiveRecordTest {
     try {
       User user = ar.findById(User.class, 2L);
       System.out.println(user.toString());
+//    	List<User> users = ar.findAll(User.class);
+//    	for (User user : users) {
+//			System.out.println(user.toString());
+//		}
     } catch (Exception e) {
       e.printStackTrace();
     }

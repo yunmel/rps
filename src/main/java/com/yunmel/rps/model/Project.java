@@ -3,7 +3,7 @@ package com.yunmel.rps.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.yunmel.rps.config.annotation.Table;
+import com.yunmel.rps.db.annotation.Table;
 
 @Table(name = "t_core_project", pk = "id")
 public class Project implements Serializable{

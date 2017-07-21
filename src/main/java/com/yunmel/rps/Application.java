@@ -3,7 +3,7 @@ package com.yunmel.rps;
 import com.blade.Blade;
 import com.blade.mvc.WebContext;
 import com.blade.mvc.view.template.JetbrickTemplateEngine;
-import com.yunmel.rps.config.impl.ActiveRecord;
+import com.yunmel.rps.db.impl.ActiveRecord;
 
 /**
  * Hello world!
