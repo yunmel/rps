@@ -21,36 +21,6 @@ import java.io.Serializable;
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
 
-/**
- * Cache following a "Most Recently Used" (MRU) algorithm for maintaining a bounded in-memory size;
- * the "Least Recently Used" (LRU) entry is the first available for removal from the cache.
- * <p/>
- * This implementation uses a "soft limit" to the in-memory size of the cache, meaning that all
- * cache entries are kept within a completely {@link java.lang.ref.SoftReference}-based map with the
- * most recently utilized entries additionally kept in a hard-reference manner to prevent those
- * cache entries soft references from becoming enqueued by the garbage collector. Thus the actual
- * size of this cache impl can actually grow beyond the stated max size bound as long as GC is not
- * actively seeking soft references for enqueuement.
- * <p/>
- * The soft-size is bounded and configurable. This allows controlling memory usage which can grow
- * out of control under some circumstances, especially when very large heaps are in use. Although
- * memory usage per se should not be a problem with soft references, which are cleared when
- * necessary, this can trigger extremely slow stop-the-world GC pauses when nearing full heap usage,
- * even with CMS concurrent GC (i.e. concurrent mode failure). This is most evident when ad-hoc HQL
- * queries are produced by the application, leading to poor soft-cache hit ratios. This can also
- * occur with heavy use of SQL IN clauses, which will generate multiples SQL queries (even if
- * parameterized), one for each collection/array size passed to the IN clause. Many slightly
- * different queries will eventually fill the heap and trigger a full GC to reclaim space, leading
- * to unacceptable pauses in some cases.
- * <p/>
- * <strong>Note:</strong> This class is serializable, however all entries are discarded on
- * serialization.
- * 
- * @author <a href="mailto:xunchangguo@gmail.com">郭训长</a>
- * @version 1.0.0 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝<br/>
- *          修订日期 修订人 描述<br/>
- *          2013-9-11 郭训长 创建<br/>
- */
 public class SoftLimitMRUCache<K, V> implements Serializable {
 
   /**

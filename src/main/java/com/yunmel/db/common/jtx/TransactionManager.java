@@ -26,14 +26,6 @@ import org.slf4j.LoggerFactory;
 
 import com.yunmel.db.common.ConnectionFactory;
 
-/**
- *
- * @author <a href="mailto:xunchangguo@gmail.com">郭训常</a>
- * @version 1.0.0
- * ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝<br/>
- * 修订日期                 修订人            描述<br/>
- * 2012-1-18       郭训常            创建<br/>
- */
 public class TransactionManager {
 	private static final Logger logger = LoggerFactory.getLogger(TransactionManager.class);
 	

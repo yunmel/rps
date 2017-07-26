@@ -1,84 +1,123 @@
 package com.yunmel.rps.model;
 
-import java.io.Serializable;
+import com.yunmel.db.anno.Table;
+import com.yunmel.db.orm.Model;
 
-import com.yunmel.rps.db.annotation.Table;
+/**
+ * Task实体类
+ * 
+ * @author yunmel
+ */
+@SuppressWarnings({"unused"})
+@Table(name = "t_core_task")
+public class Task extends Model<Task> {
+  private static final long serialVersionUID = 1138633338399224346L;
+  private Long id;
+  private Long project;
+  private String label;
+  private Long pusher;
+  private Integer exp;
+  private String result;
+  private String description;
+  private Integer classify;
+  private Integer process;
+  private Integer fettle;
 
-@Table(name = "t_core_task", pk = "id")
-public class Task implements Serializable{
+  /**
+   * @return the id
+   */
+  public Long getId() {
+    return this.getLong("id");
+  }
 
-	private static final long serialVersionUID = 4306340699127590757L;
-	
-	private Long id;
-	private Long project;
-	private String label;
-	private Long pusher;
-	private Integer exp;
-	private String result;
-	private String describe;
-	private Integer classify;
-	private Integer process;//完成进度
-	private Integer fettle;//状态
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Long getProject() {
-		return project;
-	}
-	public void setProject(Long project) {
-		this.project = project;
-	}
-	public String getLabel() {
-		return label;
-	}
-	public void setLabel(String label) {
-		this.label = label;
-	}
-	public Long getPusher() {
-		return pusher;
-	}
-	public void setPusher(Long pusher) {
-		this.pusher = pusher;
-	}
-	public Integer getExp() {
-		return exp;
-	}
-	public void setExp(Integer exp) {
-		this.exp = exp;
-	}
-	public String getResult() {
-		return result;
-	}
-	public void setResult(String result) {
-		this.result = result;
-	}
-	public String getDescribe() {
-		return describe;
-	}
-	public void setDescribe(String describe) {
-		this.describe = describe;
-	}
-	public Integer getClassify() {
-		return classify;
-	}
-	public void setClassify(Integer classify) {
-		this.classify = classify;
-	}
-	public Integer getProcess() {
-		return process;
-	}
-	public void setProcess(Integer process) {
-		this.process = process;
-	}
-	public Integer getFettle() {
-		return fettle;
-	}
-	public void setFettle(Integer fettle) {
-		this.fettle = fettle;
-	}
-	
-	
+  /**
+   * @param id the id to set
+   */
+  public void setId(Long id) {
+    this.set("id", id);
+  }
+
+  public Long getProject() {
+    return this.getLong("project");
+  }
+
+  public void setProject(Long project) {
+    this.set("project", project);
+  }
+
+  public String getLabel() {
+    return this.getString("label");
+  }
+
+  public void setLabel(String label) {
+    this.set("label", label);
+  }
+
+  public Long getPusher() {
+    return this.getLong("pusher");
+  }
+
+  public void setPusher(Long pusher) {
+    this.set("pusher", pusher);
+  }
+
+  public Integer getExp() {
+    return this.getInteger("exp");
+  }
+
+  public void setExp(Integer exp) {
+    this.set("exp", exp);
+  }
+
+  public String getResult() {
+    return this.getString("result");
+  }
+
+  public void setResult(String result) {
+    this.set("result", result);
+  }
+
+  public String getDescription() {
+    return this.getString("description");
+  }
+
+  public void setDescription(String description) {
+    this.set("description", description);
+  }
+
+  public Integer getClassify() {
+    return this.getInteger("classify");
+  }
+
+  public void setClassify(Integer classify) {
+    this.set("classify", classify);
+  }
+
+  public Integer getProcess() {
+    return this.getInteger("process");
+  }
+
+  public void setProcess(Integer process) {
+    this.set("process", process);
+  }
+
+  public Integer getFettle() {
+    return this.getInteger("fettle");
+  }
+
+  public void setFettle(Integer fettle) {
+    this.set("fettle", fettle);
+  }
+  
+  public void init() {
+    this.setId(id);
+    this.setDescription(description);
+    this.setClassify(classify);
+    this.setResult(result);
+    this.setLabel(label);
+    this.setProject(project);
+    this.setPusher(pusher);
+    this.setProcess(process);
+    this.setFettle(fettle);
+  }
 }

@@ -28,14 +28,6 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- *
- * @author <a href="mailto:xunchangguo@gmail.com">郭训常</a>
- * @version 1.0.0
- * ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝<br/>
- * 修订日期                 修订人            描述<br/>
- * 2012-1-24       郭训常            创建<br/>
- */
 public class Utils {
 
 	private final static String[] hexDigits = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };

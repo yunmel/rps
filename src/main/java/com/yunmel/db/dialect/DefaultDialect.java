@@ -18,14 +18,6 @@
  */
 package com.yunmel.db.dialect;
 
-/**
- * default dialects
- * @author <a href="mailto:xunchangguo@gmail.com">郭训长</a>
- * @version 1.0.0
- * ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝<br/>
- * 修订日期                 修订人            描述<br/>
- * 2013-12-31       郭训长            创建<br/>
- */
 public class DefaultDialect extends AbstractDialect {
 
 }

@@ -22,14 +22,6 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- *
- * @author <a href="mailto:xunchangguo@gmail.com">郭训长</a>
- * @version 1.0.0
- * ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝<br/>
- * 修订日期                 修订人            描述<br/>
- * 2013-9-11       郭训长            创建<br/>
- */
 public class LRUMap<K, V> extends LinkedHashMap<K, V> implements Serializable {
 	/**
 	 * 

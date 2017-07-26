@@ -1,91 +1,101 @@
 package com.yunmel.rps.model;
 
-import java.security.KeyStore.TrustedCertificateEntry;
+import java.util.Date;
 
-import org.antlr.v4.runtime.Parser.TraceListener;
-
-import com.yunmel.db.anno.Column;
 import com.yunmel.db.anno.Table;
+import com.yunmel.db.orm.Model;
 
+@SuppressWarnings({"unused"})
 @Table(name = "t_base_user")
-public class User{
-  @Column(name="id",primary=true)
+public class User extends Model<User> {
+  private static final long serialVersionUID = 2402641172009434025L;
   private Long id;
-  @Column(name="user_name")
-  private String userName;
-  @Column(name="password")
+  private String username;
   private String password;
-  @Column(name="name")
   private String name;
-  @Column(name="email")
   private String email;
-  @Column(name="level")
   private Integer level;
-  @Column(name="score")
   private Integer score;
+  private Date startDate;
 
+  /**
+   * @return the id
+   */
   public Long getId() {
-    return id;
+    return this.getLong("id");
   }
 
+  /**
+   * @param id the id to set
+   */
   public void setId(Long id) {
-    this.id = id;
+    this.set("id", id);
   }
 
-  public String getUserName() {
-    return userName;
+  public String getUsername() {
+    return this.getString("username");
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setUsername(String username) {
+    this.set("username", username);
   }
 
   public String getPassword() {
-    return password;
+    return this.getString("password");
   }
 
   public void setPassword(String password) {
-    this.password = password;
+    this.set("password", password);
   }
 
   public String getName() {
-    return name;
+    return this.getString("name");
   }
 
   public void setName(String name) {
-    this.name = name;
+    this.set("name", name);
   }
 
   public String getEmail() {
-    return email;
+    return this.getString("email");
   }
 
   public void setEmail(String email) {
-    this.email = email;
+    this.set("email", email);
   }
 
   public Integer getLevel() {
-    return level;
+    return this.getInteger("level");
   }
 
   public void setLevel(Integer level) {
-    this.level = level;
+    this.set("level", level);
   }
 
   public Integer getScore() {
-    return score;
+    return this.getInteger("score");
   }
 
   public void setScore(Integer score) {
-    this.score = score;
+    this.set("score", score);
   }
 
-  @Override
-  public String toString() {
-    return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", name=" + name + ", email="
-        + email + ", level=" + level + ", score=" + score + "]";
+  public Date getStartDate() {
+    return this.getDate("startDate");
   }
 
- 
-
+  public void setStartDate(Date startDate) {
+    this.set("startDate", startDate);
+  }
+  
+  public void init() {
+    this.setId(id);
+    this.setLevel(level);
+    this.setEmail(email);
+    this.setName(name);
+    this.setPassword(password);
+    this.setScore(score);
+    this.setStartDate(startDate);
+    this.setUsername(username);
+  }
 }

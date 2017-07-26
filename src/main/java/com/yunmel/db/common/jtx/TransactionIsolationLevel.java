@@ -20,14 +20,6 @@ package com.yunmel.db.common.jtx;
 
 import java.sql.Connection;
 
-/**
- *
- * @author <a href="mailto:xunchangguo@gmail.com">郭训长</a>
- * @version 1.0.0
- * ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝<br/>
- * 修订日期                 修订人            描述<br/>
- * 2012-3-26       郭训长            创建<br/>
- */
 public enum TransactionIsolationLevel {
 	NONE(Connection.TRANSACTION_NONE),
 	READ_COMMITTED(Connection.TRANSACTION_READ_COMMITTED),

@@ -3,12 +3,6 @@
  */
 package com.yunmel.rps;
 
-import java.util.List;
-
-import com.yunmel.rps.db.IActiveRecord;
-import com.yunmel.rps.db.impl.ActiveRecord;
-import com.yunmel.rps.model.User;
-
 /**
  * TODO : 该类的描述信息
  * @author xuyq(pazsolr@gmail.com)
@@ -17,16 +11,6 @@ import com.yunmel.rps.model.User;
 public class ActiveRecordTest {
   
   public static void main(String[] args) {
-    IActiveRecord ar = new ActiveRecord();
-    try {
-      User user = ar.findById(User.class, 2L);
-      System.out.println(user.toString());
-//    	List<User> users = ar.findAll(User.class);
-//    	for (User user : users) {
-//			System.out.println(user.toString());
-//		}
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+   
   }
 }

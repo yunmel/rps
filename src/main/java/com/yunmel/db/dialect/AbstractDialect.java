@@ -20,14 +20,6 @@ package com.yunmel.db.dialect;
 
 import com.yunmel.db.utils.JdbcUtils;
 
-/**
- *
- * @author <a href="mailto:xunchangguo@gmail.com">郭训长</a>
- * @version 1.0.0
- * ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝<br/>
- * 修订日期                 修订人            描述<br/>
- * 2013-12-31       郭训长            创建<br/>
- */
 public abstract class AbstractDialect implements Dialect {
 
 	/* (non-Javadoc)

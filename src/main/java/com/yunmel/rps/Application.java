@@ -3,7 +3,9 @@ package com.yunmel.rps;
 import com.blade.Blade;
 import com.blade.mvc.WebContext;
 import com.blade.mvc.view.template.JetbrickTemplateEngine;
-import com.yunmel.rps.db.impl.ActiveRecord;
+import com.yunmel.db.common.CommonDaoFactory;
+import com.yunmel.db.common.DatasourceConfig;
+import com.yunmel.db.utils.PropertyHolderUtil;
 
 /**
  * Hello world!
@@ -12,7 +14,8 @@ public class Application {
 
     public static void main(String[] args) {
     	Blade blade = Blade.me();
-    	blade.register(new ActiveRecord());
+    	DatasourceConfig config = PropertyHolderUtil.getDsConfig();
+    	blade.register(CommonDaoFactory.createActiveRecord(config));
     	WebContext.init(blade, "",false);
 //        blade.before("/*", ((request, response) -> {
 //            String uri = request.uri();
