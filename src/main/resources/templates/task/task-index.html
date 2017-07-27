@@ -5,7 +5,7 @@
                 <div class="box-header with-border ">
                     <h3 class="box-title ">普通任务</h3>
                     <div class="box-tools pull-right ">
-                        <a data-mode="add" data-width="550" data-height="400" data-url='/task/form/add/${project}' data-title='普通任务发布' data-callback="query()" class="btn btn-box-tool">
+                        <a data-mode="add" data-width="550" data-height="400" data-url='/task/form/add/${project}/1' data-title='普通任务发布' data-callback="query()" class="btn btn-box-tool">
                             <i class="fa fa-plus"></i>
                         </a>
                     </div>
@@ -20,11 +20,11 @@
                             </div>
                             <div class="product-info">
                                 <a href="javascript:void(0)" class="product-title">${task.result}
-                                    <span class="label label-warning pull-right">$${task.exp}</span>
+                                    <span class="label label-warning pull-right">${task.exp}</span>
                                 </a>
                                 <span class="product-description">
-                                    ${task.describe}
-                                    <a class="btn btn-success btn-xs pull-right">领取任务</a>
+                                    ${task.description}
+                                    <a class="btn btn-success btn-xs pull-right" id="recieve-nomal-btn" data-id="${task.id}">领取任务</a>
                                 </span>
                             </div>
                         </li>
@@ -109,3 +109,12 @@
         </div>
     </div>
 </section>
+<script>
+$(function(){
+	$('#recieve-nomal-btn').on('click',function(){
+		var id = $(this).data('id');
+		
+		
+	});
+});
+</script>

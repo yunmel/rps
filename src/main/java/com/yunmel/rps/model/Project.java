@@ -17,7 +17,7 @@ public class Project extends Model<Project> {
   private Long id;
   private String name;
   private String sn;
-  private String describe;
+  private String description;
   private Long mngr;
   private Date start;
   private Date end;
@@ -52,14 +52,13 @@ public class Project extends Model<Project> {
     this.set("sn", sn);
   }
 
-  public String getDescribe() {
-    return this.getString("describe");
+  public String getDescription() {
+    return this.getString("description");
   }
 
-  public void setDescribe(String describe) {
-    this.set("describe", describe);
+  public void setDescription(String description) {
+    this.set("description", description);
   }
-
   public Long getMngr() {
     return this.getLong("mngr");
   }

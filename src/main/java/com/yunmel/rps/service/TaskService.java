@@ -1,5 +1,6 @@
 package com.yunmel.rps.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,11 @@ public class TaskService {
 
   public List<Task> findTaskByProject(Long project, Integer fettle) {
     String sql = "select * from t_core_task t where t.project= ? and t.fettle= ?";
-    return new ArrayList<>();
+    try {
+      return dao.queryBySql(Task.class, sql, project,fettle);
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 }

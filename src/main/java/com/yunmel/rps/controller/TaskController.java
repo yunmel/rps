@@ -30,10 +30,12 @@ public class TaskController {
     return "task/task-index.html";
   }
 
-  @GetRoute("form/:mode/:project")
+  @GetRoute("form/:mode/:project/:classify")
   public String toForm(Request request) {
     String mode = request.pathString("mode");
     Long project = request.pathLong("project");
+    Integer classify = request.pathInt("classify");
+    request.attribute("classify", classify);
     request.attribute("project", project);
     return "task/task-form.html";
   }
